@@ -6,27 +6,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix,classification_report
 #------------------------------------
-df = pd.read_csv(r"F:\study programming\Python\Machine Learning\Task4\Titanic_train.csv")
-
+# Load and clean data
+df = pd.read_csv("Titanic_train.csv")
 df = df.drop(columns=['PassengerId', 'Name', 'Cabin', 'Embarked', 'Ticket'])
+# Handle missing values
 df['Age'] = df['Age'].fillna(df['Age'].mean())
+# Encode categorical features
 df['Sex'] = df['Sex'].astype("category").cat.codes
 df = df.dropna()
-
+# Split and scale data
 X = df.drop(columns='Survived')
 Y = df['Survived']
-#------------------
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=.3,random_state=42)
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled  = scaler.transform(X_test)
-
+# Train model
 clf=SVC(max_iter=10000,kernel='rbf',C=5,gamma='auto',probability=True)
 clf.fit(X_train_scaled,Y_train)
 #------------------
 #Accuracy
-print(f"The Accruracy of Train: {clf.score(X_train_scaled,Y_train)}")
-print(f"The Accruracy of Test: {clf.score(X_test_scaled,Y_test)}")
+print(f"The Accuracy of Train: {clf.score(X_train_scaled,Y_train)}")
+print(f"The Accuracy of Test: {clf.score(X_test_scaled,Y_test)}")
 #------------------
 will_you_survive = pd.DataFrame([{
     'Pclass': 1,
