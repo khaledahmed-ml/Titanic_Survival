@@ -6,13 +6,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix,classification_report
 #------------------------------------------------------------------
-df = pd.read_csv(r"F:\study programming\Python\Machine Learning\Task4\Titanic_train.csv")
-
+# Load and clean data
+df = pd.read_csv("Titanic_train.csv")
+# Handle missing values
 df = df.drop(columns=['PassengerId', 'Name', 'Cabin', 'Embarked', 'Ticket'])
 df['Age'] = df['Age'].fillna(df['Age'].mean())
+# Encode categorical features
 df['Sex'] = df['Sex'].astype("category").cat.codes
 df = df.dropna()
 
+# Split and scale data
 X = df.drop(columns='Survived')
 Y = df['Survived']
 
@@ -21,7 +24,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled  = scaler.transform(X_test)
-
+# Train model
 log_reg = LogisticRegression(max_iter=10000,penalty='l2',C=.3,solver='lbfgs').fit(X_train_scaled, Y_train)
 #-----------------------------
 # Score
@@ -34,6 +37,7 @@ print(f" w= {log_reg.coef_}")
 print(f" b= {log_reg.intercept_}")
 print('#'*50)
 #-----------------------------
+# Prediction Example
 will_you_survive = pd.DataFrame([{
     'Pclass': 2,
     'Sex':    0,
