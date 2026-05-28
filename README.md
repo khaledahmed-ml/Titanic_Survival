@@ -36,7 +36,7 @@ Predicting passenger survival on the Titanic using Machine Learning classificati
 ## How to Run
 1. Clone the repo
 2. Install dependencies: pip install -r requirements.txt
-3. Run: python titanic_logistic.py
+3. Run: python Titanic-Disaster-Log.py or Titanic-Disaster-SVM.py
 4. Don't forget to change the file path!!
 
 
