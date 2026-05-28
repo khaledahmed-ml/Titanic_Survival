@@ -4,7 +4,7 @@
 Predicting passenger survival on the Titanic using Machine Learning classification models.
 
 ## Dataset
-- Source: Kaggle Titanic Dataset
+- Source: Kaggle Titanic Dataset ( Titanic_train.csv )
 - 891 passengers, 12 features
 
 ## Models Used
